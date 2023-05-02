@@ -1,13 +1,18 @@
 package com.example.timefighter
 
+import android.os.Build.VERSION
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.example.timefighter.BuildConfig.VERSION_NAME
 
 class MainActivity : AppCompatActivity() {
     companion object{
@@ -29,6 +34,28 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var countDownTimer: CountDownTimer
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        super.onOptionsItemSelected(item)
+        if(item.itemId == R.id.about_item){
+            showInfo()
+        }
+        return true
+    }
+
+    private fun showInfo(){
+        AlertDialog
+            .Builder(this)
+            .setTitle(getString(R.string.about_title, VERSION_NAME))
+            .setMessage(getString(R.string.about_message))
+            .create()
+            .show()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
