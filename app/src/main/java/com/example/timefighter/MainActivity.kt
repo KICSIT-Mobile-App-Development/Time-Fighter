@@ -1,6 +1,5 @@
 package com.example.timefighter
 
-import android.os.Build.VERSION
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -42,13 +41,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
-        if(item.itemId == R.id.about_item){
-            showInfo()
+
+        when (item.itemId){
+            R.id.about_item -> showInfo()
         }
+
         return true
     }
 
-    private fun showInfo(){
+    private fun showInfo() {
         AlertDialog
             .Builder(this)
             .setTitle(getString(R.string.about_title, VERSION_NAME))
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
             .create()
             .show()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,8 +67,8 @@ class MainActivity : AppCompatActivity() {
         tapMeButton = findViewById(R.id.tap_me_button)
 
         tapMeButton.setOnClickListener{ view ->
-            val bouceAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce)
-            view.startAnimation(bouceAnimation)
+            val bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce)
+            view.startAnimation(bounceAnimation)
             incrementScore()
         }
 
